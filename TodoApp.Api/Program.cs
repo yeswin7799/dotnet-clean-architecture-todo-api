@@ -45,7 +45,30 @@ namespace TodoApp.Api
             builder.Services.AddSingleton<IHolidayService, HolidayService>();
             builder.Services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
 
+
             var app = builder.Build();
+
+            app.UseExceptionHandler(errorApp =>
+            {
+                errorApp.Run(async context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    context.Response.ContentType = "application/json";
+
+                    var exception = context.Features
+                        .Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()
+                        ?.Error;
+
+                    if (exception is TodoApp.Application.Validation.DomainRuleException)
+                    {
+                        await context.Response.WriteAsJsonAsync(new
+                        {
+                            error = exception.Message
+                        });
+                    }
+                });
+            });
+
 
             // -------------------------------
             // Configure the HTTP request pipeline

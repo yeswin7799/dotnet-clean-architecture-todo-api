@@ -22,20 +22,8 @@ namespace TodoApp.Api.Controllers
             [FromBody] CreateTaskRequest request,
             CancellationToken cancellationToken)
         {
-            try
-            {
-                var taskId =
-                    await _taskService.CreateAsync(request, cancellationToken);
-
-                return CreatedAtAction(
-                    nameof(GetById),
-                    new { id = taskId },
-                    new { id = taskId });
-            }
-            catch (DomainRuleException ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
+            var id = await _taskService.CreateAsync(request, cancellationToken);
+            return CreatedAtAction(nameof(GetById), new { id }, new { id });
         }
 
         // PUT: api/tasks/{id}
