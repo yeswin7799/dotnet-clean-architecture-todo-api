@@ -45,7 +45,6 @@ namespace TodoApp.Api.Controllers
         }
 
         // GET: api/tasks/{id}
-        // This is minimal, just to support CreatedAtAction
         [HttpGet("{id:guid}")]
         public IActionResult GetById(Guid id)
         {
