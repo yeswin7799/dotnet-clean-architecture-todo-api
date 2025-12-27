@@ -15,5 +15,6 @@ namespace TodoApp.Application.Interfaces
         Task<int> CountHighPriorityNotFinishedByDueDateAsync(
             DateOnly dueDate,
             CancellationToken cancellationToken);
+
     }
 }

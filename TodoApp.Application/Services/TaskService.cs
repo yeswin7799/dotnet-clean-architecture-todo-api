@@ -104,5 +104,26 @@ namespace TodoApp.Application.Services
             await _taskRepository.SaveChangesAsync(cancellationToken);
 
         }
+
+        public async Task<TaskResponse?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            var task = await _taskRepository.GetByIdAsync(id, cancellationToken);
+
+            if (task == null)
+                return null;
+
+            return new TaskResponse
+            {
+                Id = task.Id,
+                Name = task.Name,
+                Description = task.Description,
+                DueDate = task.DueDate,
+                StartDate = task.StartDate,
+                EndDate = task.EndDate,
+                Priority = task.Priority,
+                Status = task.Status
+            };
+        }
+
     }
 }

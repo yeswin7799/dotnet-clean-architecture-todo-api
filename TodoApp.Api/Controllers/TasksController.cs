@@ -46,9 +46,16 @@ namespace TodoApp.Api.Controllers
 
         // GET: api/tasks/{id}
         [HttpGet("{id:guid}")]
-        public IActionResult GetById(Guid id)
+        public async Task<IActionResult> GetById(
+            Guid id,
+            CancellationToken cancellationToken)
         {
-            return Ok(new { id });
+            var task = await _taskService.GetByIdAsync(id, cancellationToken);
+
+            if (task == null)
+                return NotFound();
+
+            return Ok(task);
         }
     }
 }
