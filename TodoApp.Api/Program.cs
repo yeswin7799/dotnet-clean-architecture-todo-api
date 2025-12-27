@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TodoApp.Api.Converters;
 using TodoApp.Application.Interfaces;
 using TodoApp.Application.Services;
 using TodoApp.Application.Validation;
@@ -18,7 +19,11 @@ namespace TodoApp.Api
             // Add services to the container
             // -------------------------------
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+                });
 
             // Swagger / OpenAPI
             builder.Services.AddEndpointsApiExplorer();
