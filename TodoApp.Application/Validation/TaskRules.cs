@@ -22,25 +22,25 @@ namespace TodoApp.Application.Validation
 
         public void ValidateDueDate(DateOnly dueDate)
         {
-            if(dueDate < _dateTimeProvider.Today())
+            if (dueDate < _dateTimeProvider.Today())
             {
                 throw new DomainRuleException(
                     "Due date cannot be in the past.");
             }
 
-            if(dueDate.DayOfWeek == DayOfWeek.Saturday  ||
-                dueDate.DayOfWeek == DayOfWeek.Sunday)
-            {
-                throw new DomainRuleException(
-                    "Due date cannot be on a weekend.");
-            }
-            if(_holidayService.IsHoliday(dueDate))
+            //if (dueDate.DayOfWeek == DayOfWeek.Saturday  ||
+            //    dueDate.DayOfWeek == DayOfWeek.Sunday)
+            //{
+            //    throw new DomainRuleException(
+            //        "Due date cannot be on a weekend.");
+            //}
+            if (_holidayService.IsHoliday(dueDate))
             {
                 throw new DomainRuleException(
                     "Due date cannot be on a holiday.");
             }
 
         }
-    
+
     }
 }
