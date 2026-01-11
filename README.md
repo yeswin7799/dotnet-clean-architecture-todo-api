@@ -1,3 +1,35 @@
+# Todo App – Clean Architecture ASP.NET Core API
+
+[![CI](https://github.com/yeswin7799/dotnet-clean-architecture-todo-api/actions/workflows/dotnet-ci.yml/badge.svg)](https://github.com/yeswin7799/dotnet-clean-architecture-todo-api/actions/workflows/dotnet-ci.yml)
+![.NET](https://img.shields.io/badge/.NET-6.0-blue)
+
+A production-style **ASP.NET Core Web API** for task management, built using **Clean Architecture**, **SOLID principles**, and **Test-Driven Development (TDD)**.  
+This project focuses on enforcing real-world business rules while keeping the system modular, testable, and maintainable.
+
+---
+
+## 🚀 Tech Stack
+
+- **Backend:** ASP.NET Core 6, C#
+- **Architecture:** Clean Architecture, Dependency Injection
+- **Data Access:** Entity Framework Core (In-Memory)
+- **Testing:** xUnit, FluentAssertions
+- **API Documentation:** Swagger / OpenAPI
+- **CI/CD:** GitHub Actions
+
+---
+
+## 🏗️ Architecture Overview
+
+The solution follows **Clean Architecture**, ensuring business logic is independent of frameworks and infrastructure.
+
+TodoApp.Api
+↓
+TodoApp.Application
+↓
+TodoApp.Domain
+↑
+TodoApp.Infrastructure
 
 ### Project Structure
 
