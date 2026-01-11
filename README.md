@@ -1,45 +1,81 @@
-﻿# TodoAppUsingDotNet
 
-This project is an ASP.NET Core Web API for managing tasks, built using Clean Architecture principles, Dependency Injection (DI), and Test-Driven Development (TDD).
-
-The application supports creating and updating tasks while enforcing business rules such as due date validation, holiday checks, and priority limits.
-
----
-
-## 🏗️ Architecture Overview
-
-The solution follows a layered architecture:
+### Project Structure
 
 - **TodoApp.Api**
-  - Exposes REST endpoints using ASP.NET Core Web API
-  - Uses Swagger for API testing
+  - ASP.NET Core Web API
+  - Exposes REST endpoints
+  - Swagger-enabled for API testing
 
 - **TodoApp.Domain**
-  - Contains core entities and enums (TaskItem, Priority, TaskStatus)
+  - Core business entities and enums
+  - `TaskItem`, `Priority`, `TaskStatus`
+  - No dependencies on other layers
 
 - **TodoApp.Application**
-  - Contains DTOs, business rules, interfaces, and services
-  - No dependency on infrastructure or API
+  - Business rules and use cases
+  - DTOs, interfaces, services
+  - Framework-agnostic
 
 - **TodoApp.Infrastructure**
-  - Implements repositories and services
-  - Uses EF Core In-Memory database
+  - Repository implementations
+  - EF Core In-Memory database
 
 - **TodoApp.Tests**
-  - Contains unit tests for business rules using xUnit and FluentAssertions
+  - Unit tests for business rules
+  - Written using xUnit and FluentAssertions
 
 ---
 
 ## 📋 Business Rules Implemented
 
-- Due date cannot be in the past
-- Due date cannot fall on a weekend
-- Due date cannot be on a holiday
-- No more than **100 High Priority tasks** with the same due date that are not finished
+The API enforces the following rules:
+
+- ❌ Due date cannot be in the past
+- ❌ Due date cannot fall on a weekend
+- ❌ Due date cannot be on a holiday
+- ❌ Maximum **100 High-Priority tasks** with the same due date that are not completed
+
+All rules are validated through **unit tests**.
 
 ---
 
-## 🚀 How to Run the Application
+## 🔍 API Endpoints
+
+| Method | Endpoint | Description |
+|------|--------|------------|
+| POST | `/api/tasks` | Create a new task |
+| PUT | `/api/tasks/{id}` | Update an existing task |
+
+Swagger UI is available for interactive testing.
+
+---
+
+## 🧪 Testing
+
+- Business rules are covered using **unit tests**
+- Tests are executed automatically via **GitHub Actions**
+- Ensures regression prevention and code stability
+
+To run tests locally:
+1. Open **Test Explorer** in Visual Studio
+2. Click **Run All Tests**
+
+---
+
+## 🗄️ Database
+
+- Uses **EF Core In-Memory Database**
+- No external setup required
+- Data resets when the application stops
+
+Designed for easy migration to:
+- PostgreSQL
+- SQL Server
+- Other relational databases
+
+---
+
+## ▶️ Running the Application
 
 ### Prerequisites
 - .NET 6 SDK
@@ -47,47 +83,23 @@ The solution follows a layered architecture:
 
 ### Steps
 1. Clone the repository
-2. Open `TodoApp.sln` in Visual Studio
-3. Set **TodoApp.Api** as the startup project
-4. Press **F5** or click **Run**
+2. Open `TodoApp.sln`
+3. Set `TodoApp.Api` as the startup project
+4. Run the application
 
 Swagger UI will open automatically.
 
 ---
 
-## 🔍 API Endpoints
-
-- **POST** `/api/tasks` — Create a new task
-- **PUT** `/api/tasks/{id}` — Update an existing task
-
-Swagger UI can be used to test these endpoints.
-
----
-
-## 🧪 Running Unit Tests
-
-1. Open **Test Explorer** in Visual Studio
-2. Click **Run All Tests**
-
-All tests should pass successfully.
-
----
-
-## 🗄️ Database
-
-- Uses **EF Core In-Memory Database**
-- No external database setup required
-- Data is reset when the application stops
-
----
-
 ## 📌 Notes
 
-- No frontend UI is included (Swagger is used for API testing)
-- The project is structured for easy extension to SQL Server or other databases if needed
+- No frontend UI is included
+- API-first design intended for extension
+- Can be integrated with Angular / React frontend
 
 ---
 
 ## 👤 Author
 
-Yeswin Chintapalli
+**Yeswin Chintapalli**  
+Software Developer | .NET Core | Backend Systems
